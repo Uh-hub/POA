@@ -1,6 +1,8 @@
 #include "Character/POA_Character.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "CharacterDebugHelper.h"
 
 APOA_Character::APOA_Character()
 {
@@ -14,19 +16,22 @@ APOA_Character::APOA_Character()
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
+
+	bUseControllerRotationYaw = false;
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+
 }
 
 
 void APOA_Character::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	Debug::Print(TEXT("Working"));
 }
 
 void APOA_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &APOA_Character::MoveForward);
@@ -64,16 +69,6 @@ void APOA_Character::LookUp(float Value)
 {
 	AddControllerPitchInput(Value);
 }
-
-
-
-
-void APOA_Character::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
 
 
 

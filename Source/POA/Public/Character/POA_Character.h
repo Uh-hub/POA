@@ -12,7 +12,6 @@ class POA_API APOA_Character : public ACharacter
 public:
 	APOA_Character();
 
-	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
