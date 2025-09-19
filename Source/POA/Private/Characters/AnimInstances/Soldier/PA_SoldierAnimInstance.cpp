@@ -1,5 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Characters/AnimInstances/PA_SoldierAnimInstance.h"
+#include "Characters/AnimInstances/Soldier/PA_SoldierAnimInstance.h"
 

@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Characters/AnimInstances/PA_AnimInstanceBase.h"
-#include "PA_SoldierAnimInstance.generated.h"
+#include "PA_SoldierLinkedAnimLayer.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class POA_API UPA_SoldierAnimInstance : public UPA_AnimInstanceBase
+class POA_API UPA_SoldierLinkedAnimLayer : public UPA_AnimInstanceBase
 {
 	GENERATED_BODY()
 	
