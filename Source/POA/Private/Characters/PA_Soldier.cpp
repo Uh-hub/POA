@@ -44,7 +44,7 @@ void APA_Soldier::BeginPlay()
 void APA_Soldier::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	checkf(InputConfigDataAsset, TEXT("Forgot to assign a valid data asset as input config"));
-	//ÄÁÆ®·Ñ·¯¸¦ ÅëÇØ ·ÎÄÃ ÇÃ·¹ÀÌ¾î¸¦ °¡Á®¿À°í ÇØ´ç ·ÎÄÃ ÇÃ·¹ÀÌ¾îÀÇ ¼­ºê ½Ã½ºÅÛµµ °¡Á®¿È
+	//ì»¨íŠ¸ë¡¤ëŸ¬ë¥¼ í†µí•´ ë¡œì»¬ í”Œë ˆì´ì–´ë¥¼ ê°€ì ¸ì˜¤ê³  í•´ë‹¹ ë¡œì»¬ í”Œë ˆì´ì–´ì˜ ì„œë¸Œ ì‹œìŠ¤í…œë„ ê°€ì ¸ì˜´
 	ULocalPlayer* LocalPlayer = GetController<APlayerController>()->GetLocalPlayer();
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LocalPlayer);
 
@@ -52,10 +52,11 @@ void APA_Soldier::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 	Subsystem->AddMappingContext(InputConfigDataAsset->DefaultMappingContext, 0);
 
-	//¸¸¾à PlayerInputComponent°¡ null ÀÌ°Å³ª cast¸¦ ½ÇÆĞÇÏ¸é Å©·¡½Ã°¡ ¹ß»ıÇÔ
+	//ë§Œì•½ PlayerInputComponentê°€ null ì´ê±°ë‚˜ castë¥¼ ì‹¤íŒ¨í•˜ë©´ í¬ë˜ì‹œê°€ ë°œìƒí•¨
 	UPA_InputComponent* SoldierInputComponent = CastChecked<UPA_InputComponent>(PlayerInputComponent);
 	SoldierInputComponent->BindNativeInputAction(InputConfigDataAsset, GameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
 	SoldierInputComponent->BindNativeInputAction(InputConfigDataAsset, GameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
+	SoldierInputComponent->BindNativeInputAction(InputConfigDataAsset, GameplayTags::InputTag_Jump, ETriggerEvent::Triggered, this, &ThisClass::Input_Jump);
 }
 
 void APA_Soldier::Input_Move(const FInputActionValue& InputActionValue)
@@ -64,14 +65,14 @@ void APA_Soldier::Input_Move(const FInputActionValue& InputActionValue)
 	const FRotator MovementRotation(0.f, Controller->GetControlRotation().Yaw, 0.f);
 
 	if (MovementVector.Y != 0.f)
-	{// ¾Õ ¶Ç´Â µÚ·Î ÀÌµ¿
+	{// ì• ë˜ëŠ” ë’¤ë¡œ ì´ë™
 		const FVector ForwardDirection = MovementRotation.RotateVector(FVector::ForwardVector);
 
 		AddMovementInput(ForwardDirection, MovementVector.Y);
 	}
 
 	if (MovementVector.X != 0.f)
-	{// ¿ŞÂÊ ¶Ç´Â ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿
+	{// ì™¼ìª½ ë˜ëŠ” ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™
 		const FVector RightDirection = MovementRotation.RotateVector(FVector::RightVector);
 
 		AddMovementInput(RightDirection, MovementVector.X);
@@ -91,4 +92,9 @@ void APA_Soldier::Input_Look(const FInputActionValue& InputActionValue)
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
 
+}
+
+void APA_Soldier::Input_Jump(const FInputActionValue& InputActionValue)
+{
+	Jump();
 }

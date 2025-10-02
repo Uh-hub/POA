@@ -11,13 +11,18 @@ void UPA_CharacterAnimInstance::NativeInitializeAnimation()
 }
 
 void UPA_CharacterAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
-{//¾Ö´Ï¸ÞÀÌ¼Ç ¾÷µ¥ÀÌÆ® ÇÔ¼ö 
+{//ì• ë‹ˆë©”ì´ì…˜ ì—…ë°ì´íŠ¸ í•¨ìˆ˜ 
 	if (!OwningCharacter || !OwningMovementComponent)
 	{
 		return;
 	}
-	//ÇöÀç ¼Óµµ ÀúÀå
+	//í˜„ìž¬ ì†ë„ ì €ìž¥
 	GroundSpeed = OwningCharacter->GetVelocity().Size2D();
-	//°¡¼Ó ÁßÀÎÁö?
+	//ê°€ì† ì¤‘ì¸ì§€?
 	bHasAcceleration = OwningMovementComponent->GetCurrentAcceleration().SizeSquared2D() > 0.f;
+
+
+
+	//Jump
+	bIsFalling = OwningMovementComponent->IsFalling();
 }
