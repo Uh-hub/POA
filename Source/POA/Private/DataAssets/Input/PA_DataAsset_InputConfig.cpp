@@ -1,12 +1,12 @@
-#include "DataAssets/Input/PA_DataAsset_InputConfig.h"
+ï»¿#include "DataAssets/Input/PA_DataAsset_InputConfig.h"
 
 UInputAction* UPA_DataAsset_InputConfig::FindNativeInputActionByTag(const FGameplayTag& InInputTag) const
 {
 	for (const FInputActionConfig& InputActionConfig : NativeInputActions)
 	{
 		if (InputActionConfig.InputTag == InInputTag && InputActionConfig.InputAction)
-		{//NativeInputActions ¾È¿¡ ÀúÀåµÈ InputActionConfigÀÇ InputTag°¡ ¸Å°³º¯¼ö·Î Àü´ŞµÈ InInputTag¿Í °°°í
-		 //±×¿Í ¿¬°áµÈ InputActionÀÌ À¯È¿ÇÒ ¶§ InputActionConfig.InputActionÀ» ¹İÈ¯ÇÔ
+		{//NativeInputActions ì•ˆì— ì €ì¥ëœ InputActionConfigì˜ InputTagê°€ ë§¤ê°œë³€ìˆ˜ë¡œ ì „ë‹¬ëœ InInputTagì™€ ê°™ê³ 
+		 //ê·¸ì™€ ì—°ê²°ëœ InputActionì´ ìœ íš¨í•  ë•Œ InputActionConfig.InputActionì„ ë°˜í™˜í•¨
 			return InputActionConfig.InputAction;
 		}
 	}

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "CoreMinimal.h"
 #include "EnhancedInputComponent.h"
@@ -22,7 +22,7 @@ inline void UPA_InputComponent::BindNativeInputAction(const UPA_DataAsset_InputC
 	checkf(InInputConfig, TEXT("InputConfig data asset is null, can not proceed with binding"));
 
 	if (UInputAction* FoundAction = InInputConfig->FindNativeInputActionByTag(InInputTag))
-	{//ÇØ´ç ÅÂ±×¿¡ ´ëÇØ FoundActionÀÌ Á¸ÀçÇÏ¸é Bind 
+	{//í•´ë‹¹ íƒœê·¸ì— ëŒ€í•´ FoundActionì´ ì¡´ì¬í•˜ë©´ Bind 
 		BindAction(FoundAction, TriggerEvent, ContextObejct, Func);
 	}
 }
